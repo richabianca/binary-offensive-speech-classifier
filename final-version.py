@@ -15,7 +15,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 # %%
-df = pd.read_csv('clean-data-LIMPO.csv')
+df = pd.read_csv('clean-data.csv')
 df['comment'] = [s.lower() for s in df.comment]
 df.drop(['Unnamed: 0'], axis=1, inplace=True)
 pd.set_option('display.max_colwidth', None)
@@ -23,8 +23,8 @@ df = df.sample(frac=1).reset_index(drop=True)
 
 
 # %%
-df["labels"] = df["class"].map({0: "No hate", 
-                                    1: "Hate"})
+df["labels"] = df["class"].map({0: "No offensive text encountered", 
+                                1: "Possible insult or toxic speech encountered"})
 
 # %%
 x = df["comment"]
@@ -73,18 +73,29 @@ ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
 
 # %%
 cv = CountVectorizer()
+import time
 
+
+# streamlit config
+st.set_page_config(
+    page_title="Offensive Speech Classifier",
+    page_icon="random",
+    layout="centered",
+)
+st.image('foto.jpeg', width=600)
 # %%
 def hate_speech_detection():
-    st.title("Hate Speech Detection")
-    user = st.text_area("Enter any Tweet: ")
+    st.title("Offensive speech classifier " u"\U0001F3F4\u200D\u2620\uFE0F")
+    user = st.text_area("Please insert any text")
     if len(user) < 1:
         st.write("  ")
     else:
         #sample = user
         #data = cv.transform([sample]).toarray()
         a = model.predict([user])
-        st.title(a)
+        if a == 'No offensive text encountered':
+            st.success(a)
+        else:
+            st.warning(a)
+            
 hate_speech_detection()
-
-
