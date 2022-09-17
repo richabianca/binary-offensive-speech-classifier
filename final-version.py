@@ -25,8 +25,8 @@ df = df.sample(frac=1).reset_index(drop=True)
 
 
 # %%
-df["labels"] = df["class"].map({0: "No offensive text encountered", 
-                                1: "Possible insult or toxic speech encountered"})
+df["labels"] = df["class"].map({0: "No offensive text detected", 
+                                1: "Possible insult or toxic speech detected"})
 
 # %%
 x = df["comment"]
@@ -95,7 +95,7 @@ def hate_speech_detection():
         #sample = user
         #data = cv.transform([sample]).toarray()
         a = model.predict([user])
-        if a == 'No offensive text encountered':
+        if a == 'No offensive text detected':
             st.success(a)
         else:
             st.warning(a)
