@@ -1,5 +1,8 @@
 ## Offensive Language Classifier
 
+![alt text](https://github.com/richabianca/binary-offensive-speech-classifier/blob/main/foto.jpeg?raw=true)
+
+
 ### Final Project from the 12 Weeks Data Science Bootcamp @ Spiced Berlin (September 2022)
 
 ##### The aim of the project is to classify hate speech/ offensive language based on user input using binary classification.
